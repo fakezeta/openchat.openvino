@@ -2,7 +2,7 @@
 numpy
 streamlit
 streamlit-chat
-openvino>=2023.2.0
+openvino>=2023.3.0
 nncf>=2.7
 sentencepiece
 gradio
