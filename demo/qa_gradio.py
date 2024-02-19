@@ -19,11 +19,17 @@ parser.add_argument('-m',
                     required=True,
                     type=str,
                     help='Required. openvino model path')
+parser.add_argument('-d',
+                    '--device',
+                    default='CPU',
+                    required=False,
+                    type=str,
+                    help='device for inference')
 args = parser.parse_args()
 
 core = Core()
 available_devices = core.available_devices
-current_device = "CPU"
+current_device = args.device
 
 print(" --- load tokenizer --- ")
 tokenizer = LlamaTokenizer.from_pretrained(args.model_id)
@@ -36,9 +42,9 @@ except:
     model = OVModelForCausalLM.from_pretrained(args.model_id, compile=False, device=args.device, export=True)
 model.compile()
 
-INSTRUCTION_KEY = "### Instruction:"
-RESPONSE_KEY = "### Response:"
-END_KEY = "### End"
+INSTRUCTION_KEY = "GPT4 Correct User: "
+RESPONSE_KEY = "GPT4 Correct Assistant: "
+END_KEY = "<|end_of_turn|>"
 INTRO_BLURB = (
     "Below is an instruction that describes a task. Write a response that appropriately completes the request."
 )
@@ -178,7 +184,7 @@ examples = [
 
 with gr.Blocks() as demo:
     gr.Markdown(
-        "# Instruction following using Llama and OpenVINO.\n"
+        "# Instruction following using OpenChat and OpenVINO.\n"
         "Provide insturction which describes a task below or select among predefined examples and model writes response that performs requested task."
     )
 

@@ -12,11 +12,11 @@ If a question does not make any sense, or is not factually coherent, explain why
 def build_inputs(history: list[tuple[str, str]],
                  query: str,
                  system_prompt=DEFAULT_SYSTEM_PROMPT) -> str:
-    texts = [f'[INST] <<SYS>>\n{system_prompt}\n<</SYS>>\n\n']
+    texts = [f'{system_prompt}<|end_of_turn|>\n']
     for user_input, response in history:
         texts.append(
-            f'{user_input.strip()} [/INST] {response.strip()} </s><s> [INST] ')
-    texts.append(f'{query.strip()} [/INST]')
+            f'GPT4 Correct User: {user_input.strip()} \nGPT4 Correct Assistant: {response.strip()}\n')
+    texts.append(f'GPT4 Correct User: {query.strip()} <|end_of_turn|> GPT4 Correct Assistant: ')
     return ''.join(texts)
 
 
