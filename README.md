@@ -1,12 +1,28 @@
-# llama2.openvino
-This sample shows how to implement a llama-based model with OpenVINO runtime.
+# openchat.openvino
 
-<img width="947" alt="MicrosoftTeams-image (2)" src="https://github.com/OpenVINO-dev-contest/llama2.openvino/assets/91237924/c210507f-1fb2-4c68-a8d9-dae945df07d3">
+## Interactive demo
 
+Download model from https://huggingface.co/fakezeta/openchat-3.5-0106-openvino-int8 in ir_model folder
+
+**1. Run interactive Q&A demo with Gradio**:
+
+    $ python3 demo/qa_gradio.py -m "./ir_model" -d GPU
+
+```-d``` argument to select the default device: depending on your hardware may be one of [these](https://docs.openvino.ai/2023.3/openvino_docs_OV_UG_supported_plugins_Supported_Devices.html). Can be changed runtime with the dropdown menu widget.
+
+This sample shows how to implement OpenChat model with OpenVINO runtime. 
+
+Only qa_gradio.py and relevant model.py has been adapted because the goal was to benchmark iGPU performance vs CPU vs other iGPU backends.
+
+<img width="947" alt="Gradio screenshot" src="https://raw.githubusercontent.com/fakezeta/openchat.openvino/main/Screenshot%202024-02-19%20at%2013-03-38%20Gradio.png">
+
+
+## Following the original README from [OpenVINO-dev-contest/llama2.openvino](https://github.com/OpenVINO-dev-contest/llama2.openvino)
 
 - Please follow the Licence on HuggingFace and get the approval from Meta before downloading llama checkpoints, for more [information](https://huggingface.co/meta-llama/Llama-2-7b-hf)
 
 - Please notice this repository is only for a functional test and personal study.
+
 
 ## Requirements
 
