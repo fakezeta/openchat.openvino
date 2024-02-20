@@ -253,6 +253,6 @@ with gr.Blocks() as demo:
     device.change(select_device, [device, user_text], [user_text])
 
 try:
-    demo.launch(enable_queue=True, share=False, height=800)
+    demo.launch(share=False, height=800)
 except Exception:
-    demo.launch(enable_queue=True, share=True, height=800)
+    demo.launch(share=True, height=800)
